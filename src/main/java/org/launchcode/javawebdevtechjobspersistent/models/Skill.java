@@ -1,12 +1,18 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 
 public class Skill extends AbstractEntity {
 
     String description;
+
+    //@ManyToMany(mappedBy ="skills")
+    //List<Job> jobs;
 
     public Skill() {
         this.description = "";
@@ -19,6 +25,5 @@ public class Skill extends AbstractEntity {
     public void setDescription(String location) {
         this.description = location;
     }
-
 
 }
