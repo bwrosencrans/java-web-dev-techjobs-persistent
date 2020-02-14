@@ -89,4 +89,8 @@ public class HomeController {
         }
         return "redirect:../add";
     }
+    @GetMapping("view{jobId}")
+    public String displayViewJob(Model model, @PathVariable int jobId) {
+        return "view";
+    }
 }
