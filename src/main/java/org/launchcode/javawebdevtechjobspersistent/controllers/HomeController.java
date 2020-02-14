@@ -23,6 +23,7 @@ public class HomeController {
 
     @Autowired
     private EmployerRepository employerRepository;
+
     @Autowired
     private SkillRepository skillRepository;
 
@@ -50,8 +51,9 @@ public class HomeController {
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model,
                                         @RequestParam int employerId,
-                                        @RequestParam List<Integer> skills,
-                                        @RequestParam List<Employer> employers) {
+                                        @RequestParam List<Integer> skills){
+
+        Iterable<Employer> employers = employerRepository.findAll();
 
         for(Employer e : employers) {
             if(e.getId() == employerId) {
