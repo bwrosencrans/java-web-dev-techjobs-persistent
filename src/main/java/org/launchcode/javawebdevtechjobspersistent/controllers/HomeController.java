@@ -62,7 +62,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST, params = {"employerId", "skills"})
-    // @PostMapping("add")
+    //@PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     @RequestParam Integer employerId,
                                     @RequestParam List<Integer> skills,
@@ -91,6 +91,14 @@ public class HomeController {
     }
     @GetMapping("view{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
+        Optional<Job> result = jobRepository.findById(jobId);
+        if (result.isEmpty()) {
+            model.addAttribute("title", "invalid Job ID:" + jobId);
+        } else {
+            Job job = result.get();
+            model.addAttribute("title", "Job Listing: " + job.getName());
+            model.addAttribute("job", job);
+        }
         return "view";
     }
 }
